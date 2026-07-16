@@ -1,0 +1,81 @@
+== JavaScript syntax ==
+PASS assets/ai-engine.js
+PASS assets/automotive-data.js
+PASS assets/common.js
+PASS assets/config.js
+PASS assets/customer.js
+PASS assets/dashboard.js
+PASS assets/join-status.js
+PASS assets/join.js
+PASS assets/lifecycle.js
+PASS assets/matching-engine.js
+PASS assets/payment.js
+PASS assets/receipt.js
+PASS assets/seed.js
+PASS assets/storage.js
+PASS assets/track.js
+PASS assets/workshop-login.js
+PASS tests/qa-unit.js
+== Python syntax ==
+PASS Python test scripts
+== Unit/integration ==
+✓ إنشاء جداول localStorage الموحدة المطلوبة
+✓ Seed آمن وغير هدّام وموسوم كتجريبي مع وثائق وتغطية
+✓ أربعة أسئلة ديناميكية وتوجيه احتمالي ومسار خطر دون تشخيص نهائي
+✓ معرفات مرجعية ومنع التكرار ورابط خاص دون بيانات حساسة
+✓ محرك المطابقة للمسارات الأربعة دون اختلاق مدينة أو توفر
+✓ إنشاء الطلب والإحالة قبل إظهار شريك واحد
+✓ حفظ المسودة والاستعادة بعد التحديث
+✓ عدم احتساب رسم قبل تلقي الخدمة وتحديد فئة التكلفة
+✓ شرائح الرسوم 0 و5 و10 و25 ومنع التكرار
+✓ تسجيل اختلاف فئة التكلفة وتعليق الرسم للمراجعة
+✓ ثلاث إحالات كحد أقصى مع استبعاد السابق
+✓ تقييم موثق فقط بعد خدمة فعلية مع تعقيم المدخلات
+✓ الاعتراض على الخدمة يعلّق الرسم ولا يحذفه
+✓ فاتورة واجبة السداد عند 100 ريال ومهلة اعتراض 15 يومًا
+✓ إصدار فاتورة يوم 1 وترحيل الرصيد الأقل من 100 دون تكرار
+✓ منع اعتراض الفاتورة بعد انقضاء 15 يومًا
+✓ سداد تجريبي وإيصال وربط الفاتورة بالمدفوعات
+✓ تعليق الشريك المتأخر وإعادة تفعيله بعد السداد
+✓ الإغلاق الإداري بعد خمسة أيام دون حذف السجل
+✓ سلامة العلاقات المرجعية في قاعدة JSON المحلية
+
+ALL_UNIT_QA_PASSED
+== Static audit ==
+{
+  "metrics": {
+    "html_files": 12,
+    "links": 54,
+    "scripts": 83,
+    "controls": 91
+  },
+  "issues": []
+}
+== Browser attempt ==
+BROWSER_E2E_SKIPPED_POLICY: Chromium is blocked from local and file URLs by the execution environment
+200 index.html
+200 customer.html
+200 track.html
+200 workshop-login.html
+200 workshop-dashboard.html
+200 join.html
+200 join-status.html
+200 payment.html
+200 receipt.html
+200 privacy.html
+200 terms.html
+200 404.html
+200 assets/styles.css
+200 assets/config.js
+200 assets/storage.js
+200 assets/seed.js
+200 assets/ai-engine.js
+200 assets/matching-engine.js
+200 assets/lifecycle.js
+200 assets/common.js
+200 assets/customer.js
+200 assets/track.js
+200 assets/dashboard.js
+200 assets/join.js
+200 assets/payment.js
+200 assets/receipt.js
