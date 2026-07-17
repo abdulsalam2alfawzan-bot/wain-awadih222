@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1d33">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="description" content="لوحة الإدارة الداخلية لمنصة وين أوديها.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'">
+  <title>لوحة الإدارة الداخلية — وين أوديها</title>
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="admin-dashboard" class="admin-page">
+  <header class="site-header unified-site-header admin-site-header">
+    <a class="skip-link" href="#main-content">تجاوز إلى المحتوى</a>
+    <div class="container nav-shell unified-header-shell admin-header-shell">
+      <a class="brand unified-brand" href="admin-dashboard.html" aria-label="وين أوديها — لوحة الإدارة">
+        <img class="brand-logo" src="assets/images/logo.png" width="900" height="283" alt="وين أوديها">
+      </a>
+      <span class="current-page-label" aria-current="page">الإدارة الداخلية</span>
+      <div class="admin-user-summary" aria-live="polite">
+        <strong id="adminUserName">—</strong>
+        <span id="adminUserRole">—</span>
+      </div>
+      <button id="adminLogout" class="btn btn-ghost btn-sm" type="button" data-icon="lock">تسجيل الخروج</button>
+    </div>
+  </header>
+
+  <main id="main-content" class="admin-main">
+    <div class="container admin-shell">
+      <section class="admin-topbar" aria-labelledby="adminTitle">
+        <div>
+          <div class="kicker">مركز العمليات والحسابات</div>
+          <h1 id="adminTitle">لوحة إدارة «وين أوديها»</h1>
+          <p>المؤشرات أدناه محسوبة مباشرة من السجلات المحفوظة في هذا المتصفح.</p>
+        </div>
+        <div class="admin-topbar-actions">
+          <button id="adminRefresh" class="btn btn-light btn-sm" type="button" data-icon="refresh">تحديث</button>
+          <button id="adminExport" class="btn btn-light btn-sm" type="button">تصدير CSV</button>
+          <button id="adminPrint" class="btn btn-light btn-sm" type="button" data-icon="print">طباعة</button>
+        </div>
+      </section>
+
+      <div id="adminSecurityNotice" class="warning-panel admin-security-notice">
+        <strong>تنبيه أمني:</strong> البوابة تعمل داخل مشروع ثابت وبياناتها في localStorage. إخفاء الرابط والصلاحيات في الواجهة لا يمثل حماية إنتاجية.
+      </div>
+
+      <nav class="admin-tabs" aria-label="أقسام لوحة الإدارة" role="tablist">
+        <button class="admin-tab active" type="button" role="tab" aria-selected="true" data-admin-tab="overview" data-permission="dashboard.view">نظرة عامة</button>
+        <button class="admin-tab" type="button" role="tab" aria-selected="false" data-admin-tab="requests" data-permission="requests.view">الطلبات والإحالات</button>
+        <button class="admin-tab" type="button" role="tab" aria-selected="false" data-admin-tab="partners" data-permission="partners.view">الشركاء</button>
+        <button class="admin-tab" type="button" role="tab" aria-selected="false" data-admin-tab="applications" data-permission="applications.view">طلبات الانضمام</button>
+        <button class="admin-tab" type="button" role="tab" aria-selected="false" data-admin-tab="finance" data-permission="finance.view">الحسابات</button>
+        <button class="admin-tab" type="button" role="tab" aria-selected="false" data-admin-tab="quality" data-permission="quality.view">الجودة والاعتراضات</button>
+        <button class="admin-tab" type="button" role="tab" aria-selected="false" data-admin-tab="users" data-permission="*">المستخدمون</button>
+        <button class="admin-tab" type="button" role="tab" aria-selected="false" data-admin-tab="audit" data-permission="audit.view">سجل التدقيق</button>
+      </nav>
+
+      <section id="panel-overview" class="admin-panel active" role="tabpanel" data-admin-panel="overview">
+        <div id="adminMetrics" class="admin-metric-grid"></div>
+        <div class="dashboard-grid two admin-overview-grid">
+          <article class="card">
+            <div class="admin-card-head"><div><h2>المتابعة التشغيلية</h2><p>أحدث الطلبات التي تحتاج إلى متابعة.</p></div></div>
+            <div id="overviewRequests" class="admin-compact-list"></div>
+          </article>
+          <article class="card">
+            <div class="admin-card-head"><div><h2>سلامة البيانات</h2><p>فحص العلاقات بين الجداول الحالية.</p></div></div>
+            <div id="integrityResult"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="panel-requests" class="admin-panel" role="tabpanel" data-admin-panel="requests" hidden>
+        <div class="admin-filterbar">
+          <label class="form-field"><span>بحث</span><input id="requestSearch" type="search" placeholder="رقم الطلب، الجوال، المدينة أو السيارة"></label>
+          <label class="form-field"><span>نوع الخدمة</span><select id="requestServiceFilter"><option value="">جميع الخدمات</option></select></label>
+          <label class="form-field"><span>الحالة</span><select id="requestStatusFilter"><option value="">جميع الحالات</option></select></label>
+        </div>
+        <div class="table-wrap admin-table-wrap">
+          <table>
+            <thead><tr><th>الطلب</th><th>العميل والسيارة</th><th>الخدمة والموقع</th><th>الحالة</th><th>الإحالات</th><th>آخر تحديث</th><th>الإجراءات</th></tr></thead>
+            <tbody id="requestsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="panel-partners" class="admin-panel" role="tabpanel" data-admin-panel="partners" hidden>
+        <div class="admin-filterbar">
+          <label class="form-field"><span>بحث</span><input id="partnerSearch" type="search" placeholder="اسم الشريك، المدينة أو رقم التواصل"></label>
+          <label class="form-field"><span>النوع</span><select id="partnerTypeFilter"><option value="">جميع الأنواع</option></select></label>
+          <label class="form-field"><span>حالة الشراكة</span><select id="partnerStatusFilter"><option value="">جميع الحالات</option><option value="active">نشط</option><option value="suspended_operations">موقوف تشغيليًا</option><option value="suspended_financial">موقوف ماليًا</option><option value="cancelled">ملغى</option></select></label>
+        </div>
+        <div class="table-wrap admin-table-wrap"><table><thead><tr><th>الشريك</th><th>النوع والموقع</th><th>الثقة والتقييم</th><th>الشراكة</th><th>السداد</th><th>الرصيد</th><th>الإجراءات</th></tr></thead><tbody id="partnersTableBody"></tbody></table></div>
+      </section>
+
+      <section id="panel-applications" class="admin-panel" role="tabpanel" data-admin-panel="applications" hidden>
+        <div class="admin-filterbar">
+          <label class="form-field"><span>بحث</span><input id="applicationSearch" type="search" placeholder="رقم الطلب، المنشأة أو المدينة"></label>
+          <label class="form-field"><span>الحالة</span><select id="applicationStatusFilter"><option value="">جميع الحالات</option><option value="submitted">قيد المراجعة</option><option value="approved">معتمد</option><option value="rejected">مرفوض</option></select></label>
+        </div>
+        <div class="table-wrap admin-table-wrap"><table><thead><tr><th>رقم الطلب</th><th>المنشأة</th><th>النوع والموقع</th><th>الوثائق</th><th>الحالة</th><th>تاريخ التقديم</th><th>الإجراءات</th></tr></thead><tbody id="applicationsTableBody"></tbody></table></div>
+      </section>
+
+      <section id="panel-finance" class="admin-panel" role="tabpanel" data-admin-panel="finance" hidden>
+        <div id="financeMetrics" class="admin-metric-grid admin-metric-grid-small"></div>
+        <div class="admin-subtabs" role="tablist" aria-label="أقسام الحسابات">
+          <button class="admin-subtab active" type="button" data-finance-view="fees">رسوم الوساطة</button>
+          <button class="admin-subtab" type="button" data-finance-view="invoices">الفواتير</button>
+          <button class="admin-subtab" type="button" data-finance-view="payments">المدفوعات</button>
+        </div>
+        <div id="financeFees" data-finance-panel="fees"><div class="table-wrap admin-table-wrap"><table><thead><tr><th>الرسم</th><th>الشريك</th><th>الطلب والإحالة</th><th>فئة التكلفة</th><th>المبلغ</th><th>الحالة</th><th>التاريخ</th><th>الإجراءات</th></tr></thead><tbody id="feesTableBody"></tbody></table></div></div>
+        <div id="financeInvoices" data-finance-panel="invoices" hidden><div class="table-wrap admin-table-wrap"><table><thead><tr><th>الفاتورة</th><th>الشريك</th><th>الدورة</th><th>المبلغ</th><th>الاستحقاق</th><th>الاعتراض</th><th>الحالة</th><th>الإجراءات</th></tr></thead><tbody id="invoicesTableBody"></tbody></table></div></div>
+        <div id="financePayments" data-finance-panel="payments" hidden><div class="table-wrap admin-table-wrap"><table><thead><tr><th>الدفعة</th><th>الشريك</th><th>الفاتورة</th><th>المبلغ</th><th>الطريقة</th><th>الإيصال</th><th>التاريخ</th></tr></thead><tbody id="paymentsTableBody"></tbody></table></div></div>
+      </section>
+
+      <section id="panel-quality" class="admin-panel" role="tabpanel" data-admin-panel="quality" hidden>
+        <div class="admin-subtabs" role="tablist" aria-label="الجودة والاعتراضات">
+          <button class="admin-subtab active" type="button" data-quality-view="objections">الاعتراضات</button>
+          <button class="admin-subtab" type="button" data-quality-view="ratings">التقييمات</button>
+          <button class="admin-subtab" type="button" data-quality-view="discounts">الخصومات</button>
+        </div>
+        <div data-quality-panel="objections"><div class="table-wrap admin-table-wrap"><table><thead><tr><th>الاعتراض</th><th>النوع</th><th>الشريك والطلب</th><th>السبب</th><th>الحالة</th><th>التاريخ</th><th>الإجراءات</th></tr></thead><tbody id="objectionsTableBody"></tbody></table></div></div>
+        <div data-quality-panel="ratings" hidden><div class="table-wrap admin-table-wrap"><table><thead><tr><th>التقييم</th><th>الشريك</th><th>الطلب</th><th>الدرجة</th><th>عدالة الأسعار</th><th>الحالة</th><th>التاريخ</th><th>الإجراءات</th></tr></thead><tbody id="ratingsTableBody"></tbody></table></div></div>
+        <div data-quality-panel="discounts" hidden><div class="table-wrap admin-table-wrap"><table><thead><tr><th>الخصم</th><th>الشريك</th><th>النسبة والنطاق</th><th>المدة</th><th>الحالة</th><th>آخر تحديث</th><th>الإجراءات</th></tr></thead><tbody id="discountsTableBody"></tbody></table></div></div>
+      </section>
+
+      <section id="panel-users" class="admin-panel" role="tabpanel" data-admin-panel="users" hidden>
+        <div class="admin-panel-actions"><button id="createAdminUser" class="btn btn-primary btn-sm" type="button" data-icon="plus">إضافة مستخدم</button></div>
+        <div class="table-wrap admin-table-wrap"><table><thead><tr><th>المستخدم</th><th>اسم الدخول</th><th>الدور</th><th>الحالة</th><th>آخر دخول</th><th>الإجراءات</th></tr></thead><tbody id="usersTableBody"></tbody></table></div>
+      </section>
+
+      <section id="panel-audit" class="admin-panel" role="tabpanel" data-admin-panel="audit" hidden>
+        <div class="admin-filterbar">
+          <label class="form-field"><span>بحث في السجل</span><input id="auditSearch" type="search" placeholder="المستخدم، الإجراء أو رقم السجل"></label>
+          <label class="form-field"><span>نوع السجل</span><select id="auditEntityFilter"><option value="">جميع الأنواع</option></select></label>
+        </div>
+        <div class="table-wrap admin-table-wrap"><table><thead><tr><th>التاريخ</th><th>المستخدم</th><th>الإجراء</th><th>السجل المتأثر</th><th>السبب</th><th>التفاصيل</th></tr></thead><tbody id="auditTableBody"></tbody></table></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer unified-site-footer admin-site-footer">
+    <div class="container unified-footer-shell">
+      <a class="footer-logo-link" href="admin-dashboard.html" aria-label="وين أوديها — لوحة الإدارة"><span class="footer-logo-plate"><img class="footer-logo" src="assets/images/logo.png" width="900" height="283" alt="وين أوديها"></span></a>
+      <p class="admin-footer-note">بوابة داخلية — لا تُستخدم كبديل عن Backend آمن في التشغيل الفعلي.</p>
+      <span class="unified-footer-copy">© 2026 وين أوديها</span>
+    </div>
+  </footer>
+
+  <dialog id="adminDetailDialog" class="dialog admin-dialog">
+    <div class="dialog-shell">
+      <div class="dialog-head"><h2 id="adminDetailTitle">التفاصيل</h2><button class="dialog-close" type="button" data-close-dialog="adminDetailDialog" aria-label="إغلاق">×</button></div>
+      <div id="adminDetailBody"></div>
+    </div>
+  </dialog>
+
+  <dialog id="adminActionDialog" class="dialog admin-dialog">
+    <form id="adminActionForm" class="dialog-shell">
+      <div class="dialog-head"><h2 id="adminActionTitle">تأكيد الإجراء</h2><button class="dialog-close" type="button" data-close-dialog="adminActionDialog" aria-label="إغلاق">×</button></div>
+      <p id="adminActionDescription" class="muted"></p>
+      <div id="adminActionExtra"></div>
+      <div class="form-field"><label class="required" for="adminActionReason">سبب الإجراء</label><textarea id="adminActionReason" required maxlength="600" placeholder="اكتب سببًا واضحًا يظهر في سجل التدقيق"></textarea></div>
+      <div class="button-row mt-16"><button class="btn btn-primary" type="submit">تأكيد</button><button class="btn btn-light" type="button" data-close-dialog="adminActionDialog">إلغاء</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="adminUserDialog" class="dialog admin-dialog">
+    <form id="adminUserForm" class="dialog-shell">
+      <div class="dialog-head"><h2 id="adminUserDialogTitle">إضافة مستخدم</h2><button class="dialog-close" type="button" data-close-dialog="adminUserDialog" aria-label="إغلاق">×</button></div>
+      <input id="adminUserId" type="hidden">
+      <div class="form-grid two">
+        <div class="form-field"><label class="required" for="newAdminName">الاسم</label><input id="newAdminName" required maxlength="100"></div>
+        <div class="form-field"><label class="required" for="newAdminUsername">اسم المستخدم</label><input id="newAdminUsername" required minlength="4" maxlength="40" pattern="[A-Za-z0-9._-]+" dir="ltr"></div>
+        <div class="form-field"><label class="required" for="newAdminRole">الدور</label><select id="newAdminRole" required></select></div>
+        <div class="form-field"><label for="newAdminStatus">الحالة</label><select id="newAdminStatus"><option value="active">نشط</option><option value="disabled">معطل</option></select></div>
+        <div class="form-field admin-user-password-field"><label class="required" for="newAdminPassword">كلمة مرور مؤقتة</label><input id="newAdminPassword" type="password" minlength="10" autocomplete="new-password" dir="ltr"></div>
+      </div>
+      <div class="button-row mt-16"><button class="btn btn-primary" type="submit">حفظ المستخدم</button><button class="btn btn-light" type="button" data-close-dialog="adminUserDialog">إلغاء</button></div>
+    </form>
+  </dialog>
+
+  <script defer src="assets/config.js"></script>
+  <script defer src="assets/automotive-data.js"></script>
+  <script defer src="assets/storage.js"></script>
+  <script defer src="assets/seed.js"></script>
+  <script defer src="assets/matching-engine.js"></script>
+  <script defer src="assets/lifecycle.js"></script>
+  <script defer src="assets/common.js"></script>
+  <script defer src="assets/admin-auth.js"></script>
+  <script defer src="assets/admin-dashboard.js"></script>
+</body>
+</html>

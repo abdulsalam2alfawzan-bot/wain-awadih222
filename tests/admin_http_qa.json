@@ -1,0 +1,112 @@
+[
+  {
+    "path": "404.html",
+    "status": 200,
+    "content_type": "text/html"
+  },
+  {
+    "path": "customer.html",
+    "status": 200,
+    "content_type": "text/html"
+  },
+  {
+    "path": "index.html",
+    "status": 200,
+    "content_type": "text/html"
+  },
+  {
+    "path": "join-status.html",
+    "status": 200,
+    "content_type": "text/html"
+  },
+  {
+    "path": "join.html",
+    "status": 200,
+    "content_type": "text/html"
+  },
+  {
+    "path": "payment.html",
+    "status": 200,
+    "content_type": "text/html"
+  },
+  {
+    "path": "privacy.html",
+    "status": 200,
+    "content_type": "text/html"
+  },
+  {
+    "path": "receipt.html",
+    "status": 200,
+    "content_type": "text/html"
+  },
+  {
+    "path": "terms.html",
+    "status": 200,
+    "content_type": "text/html"
+  },
+  {
+    "path": "track.html",
+    "status": 200,
+    "content_type": "text/html"
+  },
+  {
+    "path": "workshop-dashboard.html",
+    "status": 200,
+    "content_type": "text/html"
+  },
+  {
+    "path": "workshop-login.html",
+    "status": 200,
+    "content_type": "text/html"
+  },
+  {
+    "path": "admin-login.html",
+    "status": 200,
+    "content_type": "text/html"
+  },
+  {
+    "path": "admin-dashboard.html",
+    "status": 200,
+    "content_type": "text/html"
+  },
+  {
+    "path": "assets/styles.css",
+    "status": 200,
+    "content_type": "text/css"
+  },
+  {
+    "path": "assets/config.js",
+    "status": 200,
+    "content_type": "text/javascript"
+  },
+  {
+    "path": "assets/storage.js",
+    "status": 200,
+    "content_type": "text/javascript"
+  },
+  {
+    "path": "assets/admin-auth.js",
+    "status": 200,
+    "content_type": "text/javascript"
+  },
+  {
+    "path": "assets/admin-login.js",
+    "status": 200,
+    "content_type": "text/javascript"
+  },
+  {
+    "path": "assets/admin-dashboard.js",
+    "status": 200,
+    "content_type": "text/javascript"
+  },
+  {
+    "path": "assets/images/logo.png",
+    "status": 200,
+    "content_type": "image/png"
+  },
+  {
+    "path": "assets/images/favicon.png",
+    "status": 200,
+    "content_type": "image/png"
+  }
+]

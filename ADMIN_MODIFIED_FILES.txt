@@ -1,0 +1,17 @@
+admin-login.html
+admin-dashboard.html
+assets/config.js
+assets/storage.js
+assets/common.js
+assets/styles.css
+assets/admin-auth.js
+assets/admin-login.js
+assets/admin-dashboard.js
+tests/admin-qa.js
+README.md
+PROJECT_MODEL.md
+ADMIN_AUDIT_REPORT.md
+ADMIN_PERMISSION_MATRIX.md
+ADMIN_DATA_MODEL.md
+ADMIN_IMPLEMENTATION_PLAN.md
+ADMIN_QA_REPORT.md

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1d33">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="description" content="دخول أعضاء فريق وين أوديها إلى بوابة الإدارة الداخلية.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'">
+  <title>دخول فريق المشروع — وين أوديها</title>
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="admin-login" class="admin-page">
+  <header class="site-header unified-site-header admin-site-header">
+    <a class="skip-link" href="#main-content">تجاوز إلى المحتوى</a>
+    <div class="container nav-shell unified-header-shell">
+      <a class="brand unified-brand" href="index.html" aria-label="وين أوديها — الموقع العام">
+        <img class="brand-logo" src="assets/images/logo.png" width="900" height="283" alt="وين أوديها">
+      </a>
+      <span class="current-page-label" aria-current="page">بوابة فريق المشروع</span>
+      <a class="btn btn-ghost btn-sm" href="index.html" data-icon="home">الموقع العام</a>
+    </div>
+  </header>
+
+  <main id="main-content" class="section auth-section admin-auth-section">
+    <div class="container auth-layout admin-auth-layout">
+      <section class="card auth-card">
+        <div class="section-head">
+          <div class="kicker">دخول داخلي</div>
+          <h1>إدارة عمليات «وين أوديها»</h1>
+          <p>استخدم حسابك الفردي. تظهر لك الأقسام والإجراءات المرتبطة بدورك فقط.</p>
+        </div>
+        <form id="adminLoginForm" class="form-grid" novalidate>
+          <div class="form-field">
+            <label class="required" for="adminUsername">اسم المستخدم</label>
+            <input id="adminUsername" name="username" autocomplete="username" required maxlength="80" dir="ltr" placeholder="username">
+          </div>
+          <div class="form-field">
+            <label class="required" for="adminPassword">كلمة المرور</label>
+            <input id="adminPassword" name="password" type="password" autocomplete="current-password" required minlength="10" placeholder="••••••••••" dir="ltr">
+          </div>
+          <button id="adminLoginSubmit" class="btn btn-primary btn-block" type="submit" data-icon="lock">دخول لوحة الإدارة</button>
+        </form>
+      </section>
+
+      <aside class="auth-aside admin-security-aside">
+        <div class="card-icon" data-icon="shield" aria-hidden="true"></div>
+        <h2>وصول مخصص حسب الدور</h2>
+        <ul class="feature-checklist">
+          <li>حساب مستقل لكل عضو في الفريق.</li>
+          <li>صلاحيات للأقسام والإجراءات الحساسة.</li>
+          <li>سجل تدقيق يحفظ كل تعديل إداري.</li>
+        </ul>
+        <div class="legal-note">هذه الحماية مناسبة للعرض الداخلي على جهاز واحد فقط. التشغيل الفعلي يتطلب مصادقة وصلاحيات في Backend آمن.</div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer unified-site-footer admin-site-footer">
+    <div class="container unified-footer-shell">
+      <a class="footer-logo-link" href="index.html" aria-label="وين أوديها — الموقع العام"><span class="footer-logo-plate"><img class="footer-logo" src="assets/images/logo.png" width="900" height="283" alt="وين أوديها"></span></a>
+      <p class="admin-footer-note">بوابة داخلية لأعضاء فريق المشروع المصرح لهم فقط.</p>
+      <span class="unified-footer-copy">© 2026 وين أوديها</span>
+    </div>
+  </footer>
+
+  <script defer src="assets/config.js"></script>
+  <script defer src="assets/automotive-data.js"></script>
+  <script defer src="assets/storage.js"></script>
+  <script defer src="assets/seed.js"></script>
+  <script defer src="assets/lifecycle.js"></script>
+  <script defer src="assets/common.js"></script>
+  <script defer src="assets/admin-auth.js"></script>
+  <script defer src="assets/admin-login.js"></script>
+</body>
+</html>
